@@ -23,7 +23,10 @@ const AppReducer = (state, action) => {
     case "GET_BLOGS":
       return { ...state, blogs: action.payload };
     case "DELETE_BLOG":
-      return { ...state, blogs: [...state.blogs, action.payload] };
+      return {
+        ...state,
+        blogs: state.blogs.filter((b) => b.id !== action.payload.id),
+      };
     default:
       throw new Error("Unknown action: " + action.type);
   }
@@ -41,10 +44,7 @@ const AppProvider = ({ children }) => {
   };
   const addBlog = async (blog) => {
     try {
-      const res = await axios.post(
-        `http://localhost:3000/blogs/${blog.id}`,
-        blog
-      );
+      const res = await axios.post("http://localhost:3000/blogs", blog);
       dispatch({ type: "ADD_BLOG", payload: res.data });
     } catch (error) {
       console.error(error);
@@ -64,7 +64,7 @@ const AppProvider = ({ children }) => {
   const deleteBlog = async (id) => {
     try {
       const res = await axios.delete(`http://localhost:3000/blogs/${id}`);
-      dispatch({ type: "DELETE", payload: res.data });
+      dispatch({ type: "DELETE_BLOG", payload: res.data });
     } catch (error) {
       console.error(error);
     }
