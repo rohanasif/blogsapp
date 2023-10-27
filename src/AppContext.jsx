@@ -74,21 +74,23 @@ const AppProvider = ({ children }) => {
       const response = await axios.patch(`http://localhost:3000/blogs/${id}`, {
         likes: 1,
       });
-      dispatch({ type: "EDIT_BLOG", blog: response.data });
+      dispatch({ type: "EDIT_BLOG", payload: response.data });
     } catch (error) {
       console.error(error);
     }
   };
+
   const unlike = async (id) => {
     try {
       const response = await axios.patch(`http://localhost:3000/blogs/${id}`, {
         likes: 0,
       });
-      dispatch({ type: "EDIT_BLOG", blog: response.data });
+      dispatch({ type: "EDIT_BLOG", payload: response.data });
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <AppContext.Provider
       value={{
