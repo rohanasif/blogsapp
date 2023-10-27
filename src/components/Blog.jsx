@@ -1,20 +1,22 @@
 import { useState, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 import { AppContext } from "../AppContext";
+
 const Blog = ({ blog }) => {
-  const { title, description, author, likes } = blog;
+  const { title, description, author, likes, id } = blog;
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
 
-  const { editBlog, like, unlike, deleteBlog } = useContext(AppContext);
+  const { editBlog, like, unlike, deleteBlog, getBlogs } =
+    useContext(AppContext);
 
   const handleEdit = async () => {
     setIsEditing(true);
   };
 
   const handleSave = async () => {
-    await editBlog(blog.id, {
+    await editBlog(id, {
       ...blog,
       title: newTitle,
       description: newDescription,
@@ -23,15 +25,16 @@ const Blog = ({ blog }) => {
   };
 
   const handleLike = async () => {
-    await like(blog.id);
+    await like(id);
   };
 
   const handleUnlike = async () => {
-    await unlike(blog.id);
+    await unlike(id);
   };
 
   const handleDelete = async () => {
-    await deleteBlog(blog.id);
+    await deleteBlog(id);
+    getBlogs();
   };
 
   return (
@@ -81,4 +84,5 @@ const Blog = ({ blog }) => {
     </div>
   );
 };
+
 export default Blog;

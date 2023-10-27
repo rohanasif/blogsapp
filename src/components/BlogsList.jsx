@@ -21,9 +21,14 @@ const BlogsList = () => {
       </Button>
     </div>
   ) : (
-    blogs.map((blog, index) => {
-      return <Blog key={index} blog={blog} />;
-    })
+    <>
+      <Button variant="primary" onClick={() => navigate("/add-blog")}>
+        Add a Blog
+      </Button>
+      {blogs.map((blog, index) => {
+        return <Blog key={index} blog={blog} />;
+      })}
+    </>
   );
 };
 export default BlogsList;
