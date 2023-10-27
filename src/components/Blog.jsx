@@ -19,6 +19,7 @@ const Blog = ({ blog }) => {
       title: newTitle,
       description: newDescription,
     });
+    setIsEditing(false);
   };
 
   const handleLike = async () => {

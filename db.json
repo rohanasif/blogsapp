@@ -1,3 +1,11 @@
 {
-  "blogs": []
+  "blogs": [
+    {
+      "title": "Rohanaa",
+      "description": "dsaf",
+      "author": "asdf",
+      "likes": 0,
+      "id": 1
+    }
+  ]
 }

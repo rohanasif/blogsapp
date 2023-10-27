@@ -13,8 +13,8 @@ const AppReducer = (state, action) => {
       return {
         ...state,
         blogs: state.blogs.map((b) => {
-          if (b.id === action.blog.id) {
-            return action.blog;
+          if (b.id === action.payload.id) {
+            return action.payload;
           } else {
             return b;
           }
